@@ -1,0 +1,54 @@
+<!doctype html>
+<html ng-app="theGameApp">
+<head>
+    <!--ext scripts here-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+
+    <!--JS files here-->
+    <script src="js/game.js"></script>
+
+    <!--Style files here-->
+    <link rel="stylesheet" href="asset/css/game.css">
+
+    <!--View html files here-->
+
+
+</head>
+<body>
+    <h2>theGame</h2>
+    <div ng-controller="theGameController as theGame">
+
+        <p>{{theGame.textList}}</p>
+
+        <form ng-submit="theGame.play()" ng-show="theGame.loop">
+
+            <span>Pick your choice: </span>
+
+            <ul ng-repeat="(key,val) in theGame.choices">
+                <li ng-show="val.name">{{val.name}}</li>
+            </ul>
+
+            <input type="text" ng-model="theGame.pickText" size="30"
+                   placeholder="rock, paper, scissors, lizard, spock and goku">
+            <input class="btn-primary" type="submit" value="Play">
+        </form>
+        <div ng-show="!(theGame.loop)">
+            <p>Game hist:</p>
+            <p>
+                <span>PLAYER pick: {{theGame.player.pick}}</span>
+            </p>
+            <p>
+                <span>AI pick: {{theGame.ai.pick}}</span>
+            </p>
+            <div>
+                <p ng-show="theGame.player.win">
+                    <span>Player win with: {{theGame.player.pick}}</span>
+                </p>
+                <p ng-show="theGame.ai.win">
+                    <span>AI win with: {{theGame.ai.pick}}</span>
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
